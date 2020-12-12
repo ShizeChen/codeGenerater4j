@@ -9,5 +9,6 @@
         <module name="codeGenerater4j" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel target="8" />
   </component>
 </project>

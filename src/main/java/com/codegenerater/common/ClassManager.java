@@ -16,7 +16,7 @@ public class ClassManager {
     private static final ClassPathScanHandler SCAN_HANDLER = new ClassPathScanHandler();
 
     static {
-        CLASSES.addAll(getClazzByPath("com.dlin"));
+        CLASSES.addAll(getClazzByPath("com.codegenerater"));
     }
 
     public static Set<Class<?>> getCoderPlusClazz() {

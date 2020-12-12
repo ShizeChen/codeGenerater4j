@@ -91,7 +91,7 @@ public abstract class Bootstrap {
         Preconditions.checkNotNull(config.getWorkspacePath(), "work space path must be set！");
         Preconditions.checkNotNull(config.getExporter(), "require a exporter！");
         Preconditions.checkNotNull(config.getExtractor(), "require a extractor！");
-        Preconditions.checkNotNull(config.getResolver(), "require a resolver！");
+        Preconditions.checkNotNull(config.getCompiler(), "require a compiler！");
     }
 
     /**

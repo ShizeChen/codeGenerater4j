@@ -1,9 +1,10 @@
 package com.codegenerater.compile;
 
-import com.codegenerater.antlr.mysql.MySqlLexer;
-import com.codegenerater.antlr.mysql.MySqlParser;
-import com.codegenerater.antlr.mysql.MySqlParserBaseListener;
+import com.codegenerater.antlr.hive.HiveLexer;
+import com.codegenerater.antlr.hive.HiveParser;
+import com.codegenerater.antlr.hive.HiveParserBaseListener;
 import com.codegenerater.common.FiledType;
+import com.codegenerater.container.ManagedBean;
 import com.codegenerater.model.Model;
 import com.codegenerater.model.TableField;
 import com.codegenerater.model.TableModel;
@@ -20,7 +21,8 @@ import java.util.Optional;
  * @author: chenshize02
  * @create: 2020-12-12 16:18
  **/
-public class AntlrHiveCompiler extends MySqlParserBaseListener {
+@ManagedBean
+public class AntlrHiveCompiler extends HiveParserBaseListener {
 
     private TableModel tableModel;
 
@@ -44,48 +46,33 @@ public class AntlrHiveCompiler extends MySqlParserBaseListener {
     }
 
     @Override
-    public void enterTableName(MySqlParser.TableNameContext ctx) {
+    public void enterTableName(HiveParser.TableNameContext ctx) {
         tableModel.setName(extractContent(ctx));
     }
 
     @Override
-    public void enterColumnDeclaration(MySqlParser.ColumnDeclarationContext ctx) {
+    public void enterColumnNameTypeConstraint(HiveParser.ColumnNameTypeConstraintContext ctx) {
         TableField currentFiled = getCursor();
-        ParseTree nameNode = ctx.getChild(MySqlParser.UidContext.class, 0);
-        currentFiled.setName(extractContent(nameNode));
+        ParseTree dataNode = ctx.getChild(HiveParser.IdentifierContext.class, 0);
+        ParseTree dataNameNode = dataNode.getChild(0);
+        Optional.ofNullable(dataNameNode).ifPresent(node -> currentFiled.setName((extractContent(node))));
+        ParseTree dataNode1 = ctx.getChild(1);
+        ParseTree dataTypeNode = dataNode1.getChild(0);
+        Optional.ofNullable(dataTypeNode).ifPresent(node -> currentFiled.setType(FiledType.getBySqlType(extractContent(node))));
+        ParseTree commentNode = ctx.getChild( 3);
+        Optional.ofNullable(commentNode).ifPresent(node -> currentFiled.setComment(extractContent(node)));
     }
 
     @Override
-    public void exitColumnDeclaration(MySqlParser.ColumnDeclarationContext ctx) {
+    public void exitColumnNameTypeConstraint(HiveParser.ColumnNameTypeConstraintContext ctx) {
         tableModel.addTableFiled(getCursor());
         resetCursor();
     }
 
     @Override
-    public void enterColumnDefinition(MySqlParser.ColumnDefinitionContext ctx) {
-        TableField currentFiled = getCursor();
-        ParseTree dataTypeNode = ctx.getChild(MySqlParser.DataTypeContext.class, 0);
-        ParseTree dataTypeNameNode = dataTypeNode.getChild(0);
-        Optional.ofNullable(dataTypeNameNode).ifPresent(node -> currentFiled.setType(FiledType.getBySqlType(extractContent(node))));
-        ParseTree commentNode = ctx.getChild(MySqlParser.CommentColumnConstraintContext.class, 0);
-        Optional.ofNullable(commentNode).ifPresent(node -> currentFiled.setComment(extractContent(node.getChild(1))));
-    }
-
-    @Override
-    public void enterTableOptionComment(MySqlParser.TableOptionCommentContext ctx) {
-        ParseTree tbCommentNode = ctx.getChild(2);
+    public void enterTableComment(HiveParser.TableCommentContext ctx) {
+        ParseTree tbCommentNode = ctx.children.get(1);
         Optional.ofNullable(tbCommentNode).ifPresent(node -> tableModel.setDesc(extractContent(node)));
-    }
-
-    @Override
-    public void enterPrimaryKeyColumnConstraint(MySqlParser.PrimaryKeyColumnConstraintContext ctx) {
-        super.enterPrimaryKeyColumnConstraint(ctx);
-    }
-
-    @Override
-    public void enterPrimaryKeyTableConstraint(MySqlParser.PrimaryKeyTableConstraintContext ctx) {
-        MySqlParser.IndexColumnNamesContext pkContext = ctx.getChild(MySqlParser.IndexColumnNamesContext.class, 0);
-        Optional.ofNullable(pkContext).ifPresent(c -> tableModel.addTablePrimaryKey(extractContent(c.getChild(MySqlParser.IndexColumnNameContext.class, 0))));
     }
 
     private static String extractContent(ParseTree treeNode) {
@@ -107,10 +94,10 @@ public class AntlrHiveCompiler extends MySqlParserBaseListener {
     @Override
     public Model compile(String sourceCode) {
         CodePointCharStream input = CharStreams.fromString(sourceCode.toUpperCase());
-        MySqlLexer lexer = new MySqlLexer(input);
+        HiveLexer lexer = new HiveLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
-        MySqlParser parser = new MySqlParser(tokens);
-        MySqlParser.CreateTableContext ctDdlTree = parser.createTable();
+        HiveParser parser = new HiveParser(tokens);
+        HiveParser.CreateTableStatementContext ctDdlTree = parser.createTableStatement();
         ParseTreeWalker walker = new ParseTreeWalker();
         TableModel model = new TableModel();
         this.setTableModel(model);

@@ -89,7 +89,7 @@ public class GlobalConfig {
         private String templatesPath;
         private String groupsConfigScanPath;
         private String removePrefixIfExist;
-        private Class<? extends Compiler> resolver;
+        private Class<? extends Compiler> compiler;
         private Class<? extends Extractor> extractor;
         private Class<? extends Exporter> exporter;
 
@@ -109,8 +109,8 @@ public class GlobalConfig {
             this.templatesPath = templatesPath;
         }
 
-        public Creator setResolver(Class<? extends Compiler> resolver) {
-            this.resolver = resolver;
+        public Creator setCompiler(Class<? extends Compiler> compiler) {
+            this.compiler = compiler;
             return this;
         }
 
@@ -133,7 +133,7 @@ public class GlobalConfig {
         }
 
         public GlobalConfig init() {
-            return new GlobalConfig(workspacePath, outputDir, ddlName, templatesPath, resolver, extractor, exporter, groupsConfigScanPath, removePrefixIfExist);
+            return new GlobalConfig(workspacePath, outputDir, ddlName, templatesPath, compiler, extractor, exporter, groupsConfigScanPath, removePrefixIfExist);
         }
     }
 }

@@ -82,6 +82,9 @@ public class TableModel extends Model {
     }
 
     private Map<String, Object> tableFiledToMap(TableField f) {
+        if (f == null) {
+            return null;
+        }
         Map<String, Object> fieldsAttrs = Maps.newHashMap();
         fieldsAttrs.put(FIELD_CAMEL_NAME.key(), ofUlCode(f.getName()).toStyle(CodeStyle.NamedStyle.CAMEL).toString());
         fieldsAttrs.put(FIELD_CAPTAl_FIRST_NAME.key(), f.getCfName());

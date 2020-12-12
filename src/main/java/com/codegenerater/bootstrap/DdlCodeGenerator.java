@@ -2,6 +2,7 @@ package com.codegenerater.bootstrap;
 
 
 import com.codegenerater.common.GlobalConfig;
+import com.codegenerater.compile.Compiler;
 import com.codegenerater.exporter.CodeExporter;
 import com.codegenerater.extract.table.TableExtractor;
 
@@ -29,6 +30,11 @@ public class DdlCodeGenerator extends Bootstrap {
         return this;
     }
 
+    public DdlCodeGenerator setCompiler(Class<? extends Compiler> compiler) {
+        creator.setCompiler(compiler);
+        return this;
+    }
+
     public DdlCodeGenerator setTemplatesPath(String templatesPath) {
         creator.setTemplatesPath(templatesPath);
         return this;
@@ -43,7 +49,6 @@ public class DdlCodeGenerator extends Bootstrap {
     protected GlobalConfig configureContext() {
         return creator.setExporter(CodeExporter.class)
                 .setExtractor(TableExtractor.class)
-                .setResolver(AntlrResolver.class)
                 .init();
     }
 

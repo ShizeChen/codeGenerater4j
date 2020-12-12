@@ -2,11 +2,11 @@ package com.codegenerater.render.executor;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
-import com.dlin.container.GlobalContext;
-import com.dlin.container.GlobalContextAware;
-import com.dlin.container.ManagedBean;
-import com.dlin.render.freemarker.CodeViewRender;
-import com.dlin.templates.spec.TemplateSpec;
+import com.codegenerater.container.GlobalContext;
+import com.codegenerater.container.GlobalContextAware;
+import com.codegenerater.container.ManagedBean;
+import com.codegenerater.render.freemarker.CodeViewRender;
+import com.codegenerater.templates.spec.TemplateSpec;
 import com.google.common.base.Preconditions;
 
 import java.util.List;

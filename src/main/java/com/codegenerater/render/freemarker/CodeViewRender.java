@@ -1,10 +1,10 @@
 package com.codegenerater.render.freemarker;
 
 import cn.hutool.core.util.StrUtil;
-import com.dlin.model.Model;
-import com.dlin.model.TableModel;
-import com.dlin.render.View;
-import com.dlin.render.views.CodeView;
+import com.codegenerater.model.Model;
+import com.codegenerater.model.TableModel;
+import com.codegenerater.render.View;
+import com.codegenerater.render.views.CodeView;
 import com.google.common.base.Preconditions;
 
 public class CodeViewRender extends FreemarkerRender {

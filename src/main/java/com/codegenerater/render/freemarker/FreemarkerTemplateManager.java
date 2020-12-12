@@ -1,8 +1,8 @@
 package com.codegenerater.render.freemarker;
 
-import com.dlin.io.NioTextFileAccessor;
-import com.dlin.templates.spec.TemplateSpec;
-import com.dlin.utils.GlobalContextHolder;
+import com.codegenerater.io.NioTextFileAccessor;
+import com.codegenerater.templates.spec.TemplateSpec;
+import com.codegenerater.util.GlobalContextHolder;
 import freemarker.cache.StringTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;

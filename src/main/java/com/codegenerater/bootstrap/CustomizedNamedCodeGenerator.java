@@ -16,7 +16,6 @@ public class CustomizedNamedCodeGenerator extends DdlCodeGenerator {
     protected GlobalConfig configureContext() {
         return creator.setExporter(CodeExporter.class)
                 .setExtractor(CustomizedNamedExtractor.class)
-                .setResolver(AntlrResolver.class)
                 .init();
     }
 

@@ -4,9 +4,10 @@ import com.codegenerater.antlr.mysql.MySqlLexer;
 import com.codegenerater.antlr.mysql.MySqlParser;
 import com.codegenerater.antlr.mysql.MySqlParserBaseListener;
 import com.codegenerater.common.FiledType;
+import com.codegenerater.container.ManagedBean;
 import com.codegenerater.model.Model;
-import com.codegenerater.model.TableModel;
 import com.codegenerater.model.TableField;
+import com.codegenerater.model.TableModel;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CodePointCharStream;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -20,6 +21,7 @@ import java.util.Optional;
  * @author: chenshize02
  * @create: 2020-12-12 16:18
  **/
+@ManagedBean
 public class AntlrMySqlCompiler extends MySqlParserBaseListener {
 
     private TableModel tableModel;

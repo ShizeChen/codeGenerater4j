@@ -1,7 +1,8 @@
 package com.codegenerater.model.loader;
 
-import com.dlin.model.Model;
-import com.dlin.model.enums.BaseBuiltInAttr;
+
+import com.codegenerater.model.Model;
+import com.codegenerater.model.enums.BaseBuiltInAttr;
 
 /**
  * 用户属性兜底
