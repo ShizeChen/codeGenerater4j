@@ -1,5 +1,6 @@
 package com.codegenerater.model;
 
+import com.codegenerater.common.FiledType;
 import com.codegenerater.util.CodeStyle;
 import com.codegenerater.util.CommonUtils;
 import com.google.common.base.Joiner;
@@ -68,6 +69,7 @@ public class TableModel extends Model {
     public Map<String, Object> extractAttrs() {
         // extract table attrs
         addBuiltInAttr(MODEL.key(), ofUlCode(name).toStyle(CodeStyle.NamedStyle.CAMEL).toString())
+                .addBuiltInAttr(TABLE_NAME.key(), Optional.ofNullable(name).orElse(""))
                 .addBuiltInAttr(MODEL_DESC.key(), Optional.ofNullable(desc).orElse(""))
                 .addBuiltInAttr(MODEL_PREFIX.key(), Optional.ofNullable(bizPrefix).orElse(""))
                 .addBuiltInAttr(MODEL_CAPTAl_FIRST_NAME.key(), ofUlCode(name).toStyle(CodeStyle.NamedStyle.CAMEL).toStyle(CodeStyle.NamedStyle.CAP_FIRST).toString())
@@ -93,6 +95,7 @@ public class TableModel extends Model {
         fieldsAttrs.put(FIELD_J_STANDARD_TYPE.key(), f.getType().getStandardJavaType());
         fieldsAttrs.put(FIELD_JDBC_TYPE.key(), f.getType().getJdbcType());
         fieldsAttrs.put(FIELD_UNDERLINE_NAME.key(), ofUlCode(f.getName()).toString());
+        fieldsAttrs.put(FIELD_MYSQL_DEFAULT_VALUE.key(), FiledType.getMySqlDDLDefaultVale(f.getType()));
         return fieldsAttrs;
     }
 

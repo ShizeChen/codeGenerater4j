@@ -1,7 +1,9 @@
 package com.codegenerater.templates.embed;
 
 
+import cn.hutool.core.util.StrUtil;
 import com.codegenerater.common.FileSetting;
+import com.codegenerater.common.FileType;
 import com.codegenerater.templates.spec.Template;
 import com.codegenerater.templates.spec.TemplateSpec;
 import com.codegenerater.templates.spec.Templates;
@@ -9,8 +11,7 @@ import com.codegenerater.templates.spec.Templates;
 import static com.codegenerater.templates.embed.EmbedTemplates.*;
 
 /**
- * @author created by XD.Wang
- * Date 2020/9/4.
+ * @author: chenshize02
  */
 @Templates
 public class BaseModelTemplatesConfig {
@@ -18,6 +19,9 @@ public class BaseModelTemplatesConfig {
     private static final String SERVICE_POJO_TPL_PATH = "/ftl/pojo.ftl";
 
     private static final String SERVICE_EXAMPLE_TPL_PATH = "/ftl/example.ftl";
+
+    private static final String MYSQL_DDL_TPL_PATH = "/ftl/mySqlDDL.ftl";
+
 
     @Template(MODEL)
     public TemplateSpec pojoTemplate() {
@@ -78,4 +82,12 @@ public class BaseModelTemplatesConfig {
         return spec;
     }
 
+    @Template(MYSQL_DDL)
+    public TemplateSpec mysqlDdlTemplate() {
+        TemplateSpec spec = new TemplateSpec();
+        spec.setDescription("MYSQL_DDL");
+        spec.setPath(MYSQL_DDL_TPL_PATH);
+        spec.setFileSetting(FileSetting.of(StrUtil.EMPTY, StrUtil.EMPTY, StrUtil.EMPTY, "/ddl/", FileType.TXT));
+        return spec;
+    }
 }

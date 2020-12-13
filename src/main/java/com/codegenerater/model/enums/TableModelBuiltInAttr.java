@@ -12,6 +12,10 @@ import java.util.Objects;
 public enum TableModelBuiltInAttr {
 
     /**
+     * 表名
+     */
+    TABLE_NAME("_t_name"),
+    /**
      * 业务模型名
      */
     MODEL("_m"),
@@ -63,6 +67,10 @@ public enum TableModelBuiltInAttr {
      * 属性的jdbc类型
      */
     FIELD_JDBC_TYPE("_f_jdbct"),
+    /**
+     * 属性的MYSQL默认值
+     */
+    FIELD_MYSQL_DEFAULT_VALUE("_f_ddl_dv"),
     /**
      * 属性名称-下划线
      */

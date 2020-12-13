@@ -1,12 +1,11 @@
 package com.codegenerater.common;
 
 /**
- * @author created by XD.Wang
- * Date 2020/9/11.
+ * @author: chenshize02
  */
 public enum FileType {
 
-    JAVA(".java"), MYBATIS_XML(".xml");
+    JAVA(".java"), MYBATIS_XML(".xml"), TXT(".txt");
 
     private String ext;
 

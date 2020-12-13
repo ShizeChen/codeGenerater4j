@@ -28,7 +28,7 @@ public class GlobalConfig {
     public GlobalConfig(String workspacePath, String outputDir, String ddlName, String templatesConfigScanPath, Class<? extends Compiler> compiler, Class<? extends Extractor> extractor, Class<? extends Exporter> exporter, String groupsConfigScanPath, String removePrefixIfExist) {
         // 可默认的配置
         this.outputDir = Optional.ofNullable(outputDir).orElse("output");
-        this.ddlName = Optional.ofNullable(outputDir).orElse("ddl.sql");
+        this.ddlName = Optional.ofNullable(ddlName).orElse("ddl.sql");
         this.templatesConfigScanPath = Optional.ofNullable(templatesConfigScanPath).orElse(null);
         this.groupsConfigScanPath = Optional.ofNullable(groupsConfigScanPath).orElse(null);
         this.removePrefixIfExist = Optional.ofNullable(removePrefixIfExist).orElse(null);

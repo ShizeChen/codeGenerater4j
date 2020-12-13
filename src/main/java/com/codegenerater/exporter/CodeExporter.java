@@ -69,6 +69,8 @@ public class CodeExporter implements Exporter, GlobalContextAware {
             fileDir += fileSetting.getPrefix() + fileName + fileSetting.getSuffix() + fileSetting.getFileType().getExt();
         } else if (Objects.equals(fileSetting.getFileType(), FileType.JAVA)) {
             fileDir += fileSetting.getPrefix() + getJavaClassName(view.getContent()) + fileSetting.getSuffix();
+        } else if(Objects.equals(fileSetting.getFileType(), FileType.TXT)) {
+            fileDir += fileSetting.getPrefix() + "MySqlDDL";
         }
         return fileDir;
     }

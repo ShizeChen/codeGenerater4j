@@ -1,8 +1,7 @@
 package com.codegenerater.templates.embed;
 
 /**
- * @author created by XD.Wang
- * Date 2020/10/6.
+ * @author: chenshize02
  */
 final public class EmbedTemplates {
 
@@ -35,5 +34,7 @@ final public class EmbedTemplates {
     public static final String MYBATIS_MAPPER = "mybatis_mapper_thrift";
 
     public static final String MYBATIS_XML_MAPPER = "mybatis_mapper_xml";
+
+    public static final String MYSQL_DDL = "mysql_ddl";
 
 }

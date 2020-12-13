@@ -58,7 +58,7 @@ public class AntlrHiveCompiler extends HiveParserBaseListener {
         Optional.ofNullable(dataNameNode).ifPresent(node -> currentFiled.setName((extractContent(node))));
         ParseTree dataNode1 = ctx.getChild(1);
         ParseTree dataTypeNode = dataNode1.getChild(0);
-        Optional.ofNullable(dataTypeNode).ifPresent(node -> currentFiled.setType(FiledType.getBySqlType(extractContent(node))));
+        Optional.ofNullable(dataTypeNode).ifPresent(node -> currentFiled.setType(FiledType.getByHqlType(extractContent(node))));
         ParseTree commentNode = ctx.getChild( 3);
         Optional.ofNullable(commentNode).ifPresent(node -> currentFiled.setComment(extractContent(node)));
     }

@@ -2,7 +2,9 @@ package com.codegenerater.demo;
 
 
 import com.codegenerater.bootstrap.CustomizedNamedCodeGenerator;
+import com.codegenerater.bootstrap.DdlCodeGenerator;
 import com.codegenerater.compile.AntlrHiveCompiler;
+import com.codegenerater.compile.AntlrMySqlCompiler;
 import com.codegenerater.templates.embed.EmbedTemplates;
 
 @SuppressWarnings("Duplicates")
@@ -19,6 +21,13 @@ public class Main {
         ddlCodeGenerator.setCompiler(AntlrHiveCompiler.class);
         ddlCodeGenerator.setDdlName("ddl.sql").setWorkspacePath("/Users/chenshize/Documents/gen-codes");
         ddlCodeGenerator.execute(
+                EmbedTemplates.MYSQL_DDL
+        );
+
+        CustomizedNamedCodeGenerator ddlCodeGenerator1 = new CustomizedNamedCodeGenerator();
+        ddlCodeGenerator1.setCompiler(AntlrMySqlCompiler.class);
+        ddlCodeGenerator1.setDdlName("/output/ddl/MySqlDDL").setWorkspacePath("/Users/chenshize/Documents/gen-codes");
+        ddlCodeGenerator1.execute(
                 EmbedTemplates.DTO_POJO,
                 EmbedTemplates.QUERY_POJO,
                 EmbedTemplates.BIZ_POJO,
@@ -30,8 +39,10 @@ public class Main {
                 EmbedTemplates.SER_IMPL_REPOSITORY,
                 EmbedTemplates.SER_IMPL_MANAGER
         );
-        ddlCodeGenerator.setDdlName("ddl.sql").setWorkspacePath("/Users/chenshize/Documents/gen-codes");
-        ddlCodeGenerator.execute(
+        DdlCodeGenerator ddlCodeGenerator2 = new DdlCodeGenerator();
+        ddlCodeGenerator2.setCompiler(AntlrMySqlCompiler.class);
+        ddlCodeGenerator2.setDdlName("/output/ddl/MySqlDDL").setWorkspacePath("/Users/chenshize/Documents/gen-codes");
+        ddlCodeGenerator2.execute(
                 EmbedTemplates.MYBATIS_XML_MAPPER,
                 EmbedTemplates.MYBATIS_MAPPER
         );
